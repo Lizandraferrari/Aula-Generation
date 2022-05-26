@@ -1,0 +1,6 @@
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\classesabstratas\Cachorro.kt
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\classesabstratas\MainAbstrata.kt
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\classesabstratas\Cavalo.kt
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\classesabstratas\Bichopreguica.kt
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\Main.kt
+C:\Users\trojan.exe\IdeaProjects\untitled5\src\main\kotlin\classesabstratas\Animal.kt
