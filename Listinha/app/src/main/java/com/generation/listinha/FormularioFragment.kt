@@ -7,23 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.generation.listinha.databinding.FragmentFormularioBinding
 
 
 class FormularioFragment : Fragment() {
+
+    private lateinit var binding: FragmentFormularioBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_formulario, container, false)
+        binding = FragmentFormularioBinding.inflate(layoutInflater, container, false)
 
-        val buttonSalvar = view.findViewById<Button>(R.id.buttonSalvar)
 
-        buttonSalvar.setOnClickListener {
+        binding.buttonSalvar.setOnClickListener {
             findNavController().navigate(R.id.action_formularioFragment_to_listaFragment2)
         }
 
-        return view
+        return binding.root
     }
 
 
