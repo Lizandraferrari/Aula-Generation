@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3B2EF"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/textNovaCit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#676666"
+            android:textSize="25sp"
+            tools:text="Insira a citação desejada" />
+
+        <EditText
+            android:id="@+id/textNovoAutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#676666"
+            android:textSize="25sp"
+            tools:text="Insira o nome do autor" />
+
+        <Button
+            android:id="@+id/buttonSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF00A1"
+            android:text="Salvar" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
