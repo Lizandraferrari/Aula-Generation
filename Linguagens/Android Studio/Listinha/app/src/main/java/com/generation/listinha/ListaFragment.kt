@@ -24,46 +24,11 @@ class ListaFragment : Fragment() {
 
         binding = FragmentListaBinding.inflate(layoutInflater, container, false)
 
-
-        val listTarefas = listOf(
-            Tarefa(
-                "Lavar a louça",
-            "Louça do almoço",
-            "Liz",
-            "07-06-2022",
-                false,
-            "Dia a Dia"
-
-            ),Tarefa(
-                "Fazer arroz",
-            "Preparo de refeição",
-            "Leonardo",
-                "07-06-2022",
-                false,
-            "Dia a Dia"
-            ),Tarefa(
-                "Alimentar os gatos",
-            "Alimentar o Stalin, o Vizinha e a Sophia",
-            "Liz e Leonardo",
-                "07-06-2022",
-                false,
-            "Dia a Dia"
-            ),Tarefa(
-                "Noise Gore Fest",
-            "Show em diadema as 16. Buscar visconde, Luis e esposa do Luis na estação.",
-            "Liz",
-                "12-06-2022",
-                false,
-            "Lazer"
-            )
-        )
         val adapter = TarefaAdapter()
+
         binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
         binding.recyclerTarefa.adapter = adapter
         binding.recyclerTarefa.setHasFixedSize(true)
-
-        adapter.setList(listTarefas)
-
 
 
         binding.floatingAdd.setOnClickListener {
