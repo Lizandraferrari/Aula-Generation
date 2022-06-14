@@ -12,47 +12,49 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val rolaD6 = findViewById<Button>(R.id.rolaD6)
+        var rolaD6 = findViewById<Button>(R.id.rolaD6)
         rolaD6.setOnClickListener {
             rolaDado(6)
         }
-        val rolaD12 = findViewById<Button>(R.id.rolaD12)
+        var rolaD12 = findViewById<Button>(R.id.rolaD12)
         rolaD12.setOnClickListener {
             rolaDado(12)
         }
 
-        val rolaD20 = findViewById<Button>(R.id.rolaD20)
+        var rolaD20 = findViewById<Button>(R.id.rolaD20)
         rolaD20.setOnClickListener {
             rolaDado(20)
         }
     }
 
     private fun rolaDado(lados: Int) {
-        val rolagem = (1..lados).random()
-        val textDado = findViewById<TextView>(R.id.textDado)
+        var rolagem = (1..lados).random()
+        var textDado = findViewById<TextView>(R.id.textDado)
         textDado.text = rolagem.toString()
-        val image = findViewById<ImageView>(R.id.imageView)
+        var image = findViewById<ImageView>(R.id.imageView)
 
-        when (rolagem) {
-            1 -> {
-                image.setImageResource(R.drawable.biker)
+
+            when (rolagem) {
+
+                1 -> {
+                    image.setImageResource(R.drawable.biker)
+                }
+                2 -> {
+                    image.setImageResource(R.drawable.yamcha)
+                }
+                3 -> {
+                    image.setImageResource(R.drawable.jaja)
+                }
+                4 -> {
+                    image.setImageResource(R.drawable.patinha)
+                }
+                5 -> {
+                    image.setImageResource(R.drawable.mine)
+                }
+                6 -> {
+                    image.setImageResource(R.drawable.magobolado)
+                }
             }
-            2 -> {
-                image.setImageResource(R.drawable.yamcha)
-            }
-            3 -> {
-                image.setImageResource(R.drawable.jaja)
-            }
-            4 -> {
-                image.setImageResource(R.drawable.patinha)
-            }
-            5 -> {
-                image.setImageResource(R.drawable.mine)
-            }
-            6 -> {
-                image.setImageResource(R.drawable.magobolado)
-            }
-        }
 
         when (rolagem) {
             1 -> {
@@ -92,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 image.setImageResource(R.drawable.orc)
             }
         }
-        when (R.id.rolaD20) {
+        when (rolagem) {
             1 -> {
                 image.setImageResource(R.drawable.biker)
             }

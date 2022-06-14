@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.generation.listinha.api.Repository
 import com.generation.listinha.model.Categoria
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,12 +25,14 @@ class MainViewModel @Inject constructor(
 
     val myCategoriaResponse: LiveData<Response<List<Categoria>>> = _myCategoriaResponse
 
+    val dataSelecionada = MutableLiveData<LocalDate>()
+
     init {
         listCategoria()
     }
 
     fun listCategoria(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try{
                 val response = repository.listCategoria()
                 _myCategoriaResponse.value = response
