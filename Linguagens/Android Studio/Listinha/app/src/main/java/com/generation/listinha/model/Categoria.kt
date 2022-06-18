@@ -3,7 +3,7 @@ package com.generation.listinha.model
 data class Categoria(
     var id: Long,
     var descricao: String?,
-    var tarefas: List<Tarefa?>
+    var tarefas: List<Tarefa>?
 
 ) {
 
