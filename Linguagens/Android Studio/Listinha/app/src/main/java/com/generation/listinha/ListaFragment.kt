@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import com.generation.listinha.adapter.TarefaAdapter
 import com.generation.listinha.adapter.TaskClickListener
 import com.generation.listinha.databinding.FragmentListaBinding
 import com.generation.listinha.model.Tarefa
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListaFragment : Fragment(), TaskClickListener {
 
@@ -28,7 +26,7 @@ class ListaFragment : Fragment(), TaskClickListener {
 
         binding = FragmentListaBinding.inflate(layoutInflater, container, false)
 
-        val tarefaAdapter = TarefaAdapter(this, mainViewModel)
+        val tarefaAdapter = TarefaAdapter(this, mainViewModel, requireContext())
 
         binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
         binding.recyclerTarefa.adapter = tarefaAdapter

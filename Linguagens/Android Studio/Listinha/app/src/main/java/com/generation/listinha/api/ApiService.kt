@@ -25,7 +25,7 @@ interface ApiService {
 
     @DELETE("tarefa/{id}")
     suspend fun deleteTarefa(
-        @Path("id") valor: Long
+        @Path("id") id: Long
     ): Response<Tarefa>
 
 }

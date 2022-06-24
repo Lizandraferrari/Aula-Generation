@@ -10,11 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.generation.listinha.databinding.FragmentFormularioBinding
 import com.generation.listinha.fragment.DatePickerFragment
@@ -68,7 +65,7 @@ class FormularioFragment() : Fragment(), TimePickerListener {
         if (categorias != null){
             binding.spinnerCategoria.adapter = ArrayAdapter(
                     requireContext(),
-                    R.layout.support_simple_spinner_dropdown_item,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
                     categorias
                 )
             
@@ -126,6 +123,7 @@ class FormularioFragment() : Fragment(), TimePickerListener {
         val data = binding.editData.text.toString()
         val status = binding.switchAtivoCard.isChecked
         val categoria = Categoria(categoriaSelecionada, null, null)
+        Log.d("categoria", categoria.id.toString())
 
         if (validarCampos(nome, desc, resp, data)) {
             val salvar: String

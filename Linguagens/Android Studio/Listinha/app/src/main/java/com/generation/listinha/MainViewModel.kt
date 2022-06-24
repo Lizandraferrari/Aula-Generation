@@ -90,9 +90,7 @@ class MainViewModel @Inject constructor(
                 Log.d("Erro", e.message.toString())
             }
         }
-
     }
-
-}
+   }
 
 

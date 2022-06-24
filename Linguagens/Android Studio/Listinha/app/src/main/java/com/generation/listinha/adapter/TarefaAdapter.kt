@@ -1,5 +1,7 @@
 package com.generation.listinha.adapter
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,8 @@ import com.generation.listinha.model.Tarefa
 
 class TarefaAdapter (
     val taskClickListener: TaskClickListener,
-    val mainViewModel: MainViewModel
+    val mainViewModel: MainViewModel,
+    val context: Context
         ) : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
 
     class TarefaViewHolder (val binding: CardLayoutBinding): RecyclerView.ViewHolder(binding.root)
@@ -40,8 +43,9 @@ class TarefaAdapter (
                 tarefa.status = ativo
                 mainViewModel.updateTarefa(tarefa)
             }
+
         holder.binding.buttonDeletar.setOnClickListener {
-            mainViewModel.deleteTarefa(tarefa.id)
+            showAlertDialog(tarefa.id)
         }
 
     }
@@ -51,8 +55,18 @@ class TarefaAdapter (
     }
 
     fun setList(list: List<Tarefa>){
-        listTarefa = list.sortedByDescending { it.id }
+        listTarefa = list.sortedByDescending{ it.id }
         notifyDataSetChanged()
     }
-
+    private fun showAlertDialog(id: Long){
+        AlertDialog.Builder(context)
+            .setTitle("Excluir Tarefa")
+            .setMessage("Deseja excluir a tarefa?")
+            .setPositiveButton("Sim"){
+                _,_ -> mainViewModel.deleteTarefa(id)
+            }
+            .setNegativeButton("Não"){
+                _,_ ->
+            }.show()
+    }
 }
