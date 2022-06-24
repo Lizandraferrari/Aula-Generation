@@ -10,11 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.generation.listinha.adapter.TarefaAdapter
+import com.generation.listinha.adapter.TaskClickListener
 import com.generation.listinha.databinding.FragmentListaBinding
 import com.generation.listinha.model.Tarefa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListaFragment : Fragment() {
+class ListaFragment : Fragment(), TaskClickListener {
 
     private lateinit var binding: FragmentListaBinding
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -23,12 +24,11 @@ class ListaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainViewModel.listTarefa()
 
         binding = FragmentListaBinding.inflate(layoutInflater, container, false)
 
-        mainViewModel.listTarefa()
-
-        val tarefaAdapter = TarefaAdapter()
+        val tarefaAdapter = TarefaAdapter(this, mainViewModel)
 
         binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
         binding.recyclerTarefa.adapter = tarefaAdapter
@@ -36,14 +36,20 @@ class ListaFragment : Fragment() {
 
 
         binding.floatingAdd.setOnClickListener {
+            mainViewModel.tarefaSeleciona = null
             findNavController().navigate(R.id.action_listaFragment_to_formularioFragment)
         }
-        mainViewModel.myTarefaResponse.observe(viewLifecycleOwner){
-            response -> if(response != null){    //verifica se é nnulo, caso sim, dá erro
+        mainViewModel.myTarefaResponse.observe(viewLifecycleOwner,{
+            response -> if(response != null){    //verifica se é nulo, caso sim, dá erro
                 tarefaAdapter.setList(response.body()!!)
         }
-        }
+        })
 
         return binding.root
+    }
+
+    override fun onTaskClickListener(tarefa: Tarefa) {
+        mainViewModel.tarefaSeleciona=tarefa
+        findNavController().navigate(R.id.action_listaFragment_to_formularioFragment)
     }
 }

@@ -27,6 +27,7 @@ class FormularioFragment() : Fragment(), TimePickerListener {
     private lateinit var binding: FragmentFormularioBinding
     private var categoriaSelecionada = 0L
     private val mainViewModel: MainViewModel by activityViewModels()
+    private var tarefaSelecionada: Tarefa? = null
 
     constructor(parcel: Parcel) : this() {
     }
@@ -35,6 +36,8 @@ class FormularioFragment() : Fragment(), TimePickerListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFormularioBinding.inflate(inflater, container, false)
+
+        carregarDados()
 
         mainViewModel.listCategoria()
 
@@ -124,10 +127,19 @@ class FormularioFragment() : Fragment(), TimePickerListener {
         val status = binding.switchAtivoCard.isChecked
         val categoria = Categoria(categoriaSelecionada, null, null)
 
-        if (validarCampos(nome, desc, resp, data)){
-            val tarefa = Tarefa(0,nome, desc, resp, data, status, categoria)
-            mainViewModel.addTarefa(tarefa)
-            Toast.makeText(context,"Tarefa Criada!", Toast.LENGTH_SHORT).show()
+        if (validarCampos(nome, desc, resp, data)) {
+            val salvar: String
+            if (tarefaSelecionada != null) {
+                salvar = "Tarefa Atualizada!"
+                val tarefa =
+                    Tarefa(tarefaSelecionada?.id!!, nome, desc, resp, data, status, categoria)
+                mainViewModel.addTarefa(tarefa)
+            } else {
+                salvar = "Tarefa Criada"
+                val tarefa = Tarefa(0, nome, desc, resp, data, status, categoria)
+                mainViewModel.addTarefa(tarefa)
+        }
+            Toast.makeText(context,salvar, Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_formularioFragment_to_listaFragment2)
 
         }else{
@@ -135,6 +147,19 @@ class FormularioFragment() : Fragment(), TimePickerListener {
 
         }
 
+    }
+
+    private fun carregarDados(){
+        tarefaSelecionada = mainViewModel.tarefaSeleciona
+        if (tarefaSelecionada != null){
+            binding.editNome.setText(tarefaSelecionada?.nome)
+            binding.editResponsavel.setText(tarefaSelecionada?.responsavel)
+            binding.editDescricao.setText(tarefaSelecionada?.descricao)
+            binding.editData.setText(tarefaSelecionada?.data)
+            binding.switchAtivoCard.isChecked = tarefaSelecionada?.status!!
+
+
+        }
     }
 
     override fun onDateSelected(date: LocalDate) {

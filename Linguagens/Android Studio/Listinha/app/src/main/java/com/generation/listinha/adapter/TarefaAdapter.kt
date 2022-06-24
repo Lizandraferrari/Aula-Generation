@@ -3,14 +3,18 @@ package com.generation.listinha.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.generation.listinha.MainViewModel
 import com.generation.listinha.databinding.CardLayoutBinding
 import com.generation.listinha.model.Tarefa
 
-class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
-    
-    private var listTarefa = emptyList<Tarefa>()
+class TarefaAdapter (
+    val taskClickListener: TaskClickListener,
+    val mainViewModel: MainViewModel
+        ) : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
 
     class TarefaViewHolder (val binding: CardLayoutBinding): RecyclerView.ViewHolder(binding.root)
+
+    private var listTarefa = emptyList<Tarefa>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarefaViewHolder {
         return TarefaViewHolder(CardLayoutBinding.inflate(
@@ -27,6 +31,19 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
         holder.binding.switchAtivo.isChecked = tarefa.status
         holder.binding.textCategoria.text = tarefa.categoria.descricao
 
+        holder.itemView.setOnClickListener{
+            taskClickListener.onTaskClickListener(tarefa)
+        }
+
+        holder.binding.switchAtivo
+            .setOnCheckedChangeListener{ compoundButton, ativo ->
+                tarefa.status = ativo
+                mainViewModel.updateTarefa(tarefa)
+            }
+        holder.binding.buttonDeletar.setOnClickListener {
+            mainViewModel.deleteTarefa(tarefa.id)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +51,7 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
     }
 
     fun setList(list: List<Tarefa>){
-        listTarefa = list
+        listTarefa = list.sortedByDescending { it.id }
         notifyDataSetChanged()
     }
 
