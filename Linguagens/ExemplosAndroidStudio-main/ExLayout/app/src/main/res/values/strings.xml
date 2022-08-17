@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TelaLogin</string>
+    <string name="bem_vindo_ao_maik_s_app">Bem vindo ao Maik\'s App</string>
+    <string name="usu_rio">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="sign_in">SIGN IN</string>
+</resources>
